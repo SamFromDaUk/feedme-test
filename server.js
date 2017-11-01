@@ -1,2 +1,3 @@
 require('babel-register');
-require('./app/index.js');
+require('dotenv-safe').load({ sample: './.env.dev' });
+require('./app/index.js').default();
