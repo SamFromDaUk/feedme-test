@@ -8,10 +8,15 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.26.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "eslint": "eslint ."
   },
   "repository": {
     "type": "git",
