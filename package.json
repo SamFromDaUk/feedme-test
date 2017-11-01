@@ -1,0 +1,26 @@
+{
+  "name": "feedme-tech-test",
+  "version": "1.0.0",
+  "description": "The FeedMe tech test comes with a mock data feed service that represents one of the many types of data feeds we have to process everyday at Sky Bet.",
+  "main": "server.js",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamFromDaUk/feedme-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamFromDaUk/feedme-test/issues"
+  },
+  "homepage": "https://github.com/SamFromDaUk/feedme-test#readme"
+}
