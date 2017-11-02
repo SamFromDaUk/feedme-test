@@ -3,9 +3,7 @@ export default class {
     this.buffer = '';
     this.fn = () => {};
 
-    setInterval(() => {
-      this.getPacket();
-    }, 500);
+    this.getPacket();
   }
 
   onStream(data) {
@@ -16,6 +14,7 @@ export default class {
     const separator = this.buffer.indexOf('\n');
 
     if (separator < 0) {
+      this.checkBuffer();
       return;
     }
 
@@ -24,7 +23,18 @@ export default class {
 
     if (this.buffer.length) {
       this.getPacket();
+
+      return;
     }
+
+    this.checkBuffer();
+  }
+
+  // Once the buffer is exhausted wait 100ms before checking again
+  checkBuffer() {
+    setTimeout(() => {
+      this.getPacket();
+    }, 100);
   }
 
   onChunk(fn) {
