@@ -1,28 +1,29 @@
 const map = {
   standard: ['msgId', 'operation', 'type', 'timestamp'],
-  event: ['eventId', 'category', 'subCategory', 'name', 'startTime', 'displayed', 'suspended'],
-  market: ['eventId', 'marketId', 'name', 'displayed', 'suspended'],
-  outcome: ['marketId', 'outcomeId', 'name', 'price', 'displayed', 'suspended'],
+  event: ['id', 'category', 'subCategory', 'name', 'startTime', 'displayed', 'suspended'],
+  market: ['eventId', 'id', 'name', 'displayed', 'suspended'],
+  outcome: ['marketId', 'id', 'name', 'price', 'displayed', 'suspended'],
 };
 
 export default (chunk) => {
+  // @todo refactor this (handle escaped pipes)
   const arr = chunk.replace(/\\\|/g, ':::').split('|').map(section => section.replace(/:::/g, '|'));
   const output = {
-    data: {},
+    meta: {},
   };
 
   arr.shift();
 
   map.standard.forEach((key) => {
-    output[key] = arr.shift();
+    output.meta[key] = arr.shift();
   });
 
-  if (!['event', 'market', 'outcome'].includes(output.type)) {
-    throw new Error(`Unexpected output type: ${output.type}`);
+  if (!['event', 'market', 'outcome'].includes(output.meta.type)) {
+    throw new Error(`Unexpected output type: ${output.meta.type}`);
   }
 
-  map[output.type].forEach((key) => {
-    output.data[key] = arr.shift();
+  map[output.meta.type].forEach((key) => {
+    output[key] = arr.shift();
   });
 
   return output;

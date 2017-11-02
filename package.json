@@ -6,7 +6,8 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
-    "babel-register": "^6.26.0"
+    "babel-register": "^6.26.0",
+    "mongodb": "^2.2.33"
   },
   "devDependencies": {
     "eslint": "^4.10.0",

@@ -47,8 +47,13 @@ services:
       - PORT=3000
       - FEEDME_HOST=provider
       - FEEDME_PORT=8282
+      - MONGODB_SERVER=mongodb://mongodb:27017/feed-data
     volumes:
       - ./:/home/node/app
     ports:
       - "3000:3000"
     command: "npm start"
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
