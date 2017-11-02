@@ -37,7 +37,7 @@ export default class {
     }, 100);
   }
 
-  onChunk(fn) {
+  onPacket(fn) {
     this.fn = fn;
   }
 }

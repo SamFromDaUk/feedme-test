@@ -34,7 +34,21 @@ services:
   #      RABBITMQ_DEFAULT_VHOST: "/feedme"
 
   provider:
-      image: sbgfeedme/provider:latest
-      ports:
-        - "8181:8181"
-        - "8282:8282"
+    image: sbgfeedme/provider:latest
+    ports:
+      - "8181:8181"
+      - "8282:8282"
+  node:
+    image: "node:8"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - FEEDME_HOST=provider
+      - FEEDME_PORT=8282
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - "3000:3000"
+    command: "npm start"

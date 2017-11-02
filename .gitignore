@@ -49,5 +49,3 @@ test/integration
 
 # Excel temp files
 app/mappings/~*
-
-.env
