@@ -1,5 +1,5 @@
 import assert from 'assert';
 
-describe('models/event', () => {
+describe('providers/feed', () => {
 
 });

@@ -48,6 +48,7 @@ services:
       - FEEDME_HOST=provider
       - FEEDME_PORT=8282
       - MONGODB_SERVER=mongodb://mongodb:27017/feed-data
+      - CLEAR_DB_ON_STARTUP=true
     volumes:
       - ./:/home/node/app
     ports:

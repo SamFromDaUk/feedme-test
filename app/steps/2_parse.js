@@ -5,9 +5,13 @@ const map = {
   outcome: ['marketId', 'id', 'name', 'price', 'displayed', 'suspended'],
 };
 
-export default (chunk) => {
+export default (packet) => {
   // @todo refactor this (handle escaped pipes)
-  const arr = chunk.replace(/\\\|/g, ':::').split('|').map(section => section.replace(/:::/g, '|'));
+  const arr = packet
+    .replace(/\\\|/g, ':::')
+    .split('|')
+    .map(section => section.replace(/:::/g, '|'));
+
   const output = {
     meta: {},
   };

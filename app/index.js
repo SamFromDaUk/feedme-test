@@ -1,37 +1,30 @@
-import FeedMe from './providers/Feed';
-import StreamHandler from './models/StreamHandler';
-import event from './models/FeedItem';
+import feed from './providers/feed';
+import buffer from './steps/1_buffer';
+import parse from './steps/2_parse';
+import store from './steps/3_store';
 import mongo from './stores/mongodb';
-
-const createItem = async (item) => {
-  try {
-    const db = await mongo();
-
-    await db.collection(item.meta.type).insertOne(item);
-  } catch (e) {
-    console.log(e);
-  }
-};
 
 export default async () => {
   console.log('Starting app');
 
   try {
-    await mongo();
+    const db = await mongo();
 
-    const socket = await FeedMe();
-    const streamHandler = new StreamHandler();
+    if (process.env.CLEAR_DB_ON_STARTUP) {
+      console.log('mongo: dropping database');
+      await db.dropDatabase();
+    }
+
+    const socket = await feed();
 
     socket.on('data', (chunk) => {
-      streamHandler.onStream(chunk);
-    });
+      const packets = buffer(chunk);
 
-    streamHandler.onPacket((packet) => {
-      const item = event(packet);
+      const events = packets.map(packet => parse(packet));
 
-      if (item.meta.operation === 'create') {
-        createItem(item);
-      }
+      events.forEach((event) => {
+        store(event);
+      });
     });
   } catch (e) {
     console.log(e);
