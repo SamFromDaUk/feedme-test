@@ -1,8 +1,6 @@
 import mongo from '../stores/mongodb';
 
 const create = async (event) => {
-  console.log('create', JSON.stringify(event));
-
   try {
     const db = await mongo();
     const data = {
@@ -17,8 +15,6 @@ const create = async (event) => {
 };
 
 const update = async (event) => {
-  console.log('update', JSON.stringify(event));
-
   try {
     const db = await mongo();
     const data = {
