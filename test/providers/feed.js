@@ -7,9 +7,7 @@ let createConnectionStub = () => {};
 beforeEach(() => {
   feed = proxyquire('../../app/providers/feed', {
     net: {
-      createConnection: () => { // eslint-disable-line arrow-body-style
-        return createConnectionStub(...arguments);
-      },
+      createConnection: () => createConnectionStub(...arguments),
     },
   });
 });
