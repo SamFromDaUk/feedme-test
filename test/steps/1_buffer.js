@@ -8,10 +8,10 @@ beforeEach(() => {
 });
 
 const testData = {
-  lessThanOnePacket: Buffer.from('123|1234|12345'),
-  morethanOnePacket: Buffer.from('123|1234|12345\n234|2345|'),
-  morethanTwoPacket: Buffer.from('123|1234|12345\n234|2345|23456\n123'),
-  separatedPacket: [Buffer.from('123|1234|1234'), Buffer.from('5\n')],
+  lessThanOnePacket: Buffer.from('|123|1234|12345|'),
+  morethanOnePacket: Buffer.from('|123|1234|12345\n234|2345'),
+  morethanTwoPacket: Buffer.from('|123|1234|12345\n234|2345|23456|\n|123'),
+  separatedPacket: [Buffer.from('|123|1234|1234'), Buffer.from('5|\n')],
 };
 
 describe('steps/1_buffer', () => {
@@ -33,6 +33,6 @@ describe('steps/1_buffer', () => {
     const data = buffer.default(testData.separatedPacket[1]);
 
     assert.equal(1, data.length);
-    assert.equal('123|1234|12345', data[0]);
+    assert.equal('|123|1234|12345|', data[0]);
   });
 });
